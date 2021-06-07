@@ -1,4 +1,4 @@
 build
-config.ts
+config.yaml
 node_modules
 coverage
