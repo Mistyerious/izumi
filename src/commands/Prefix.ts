@@ -15,7 +15,7 @@ export default class extends IzumiCommand {
 
 		if (!prefix.success) return message.embed.error.setDescription(`Invalid prefix provided.\nBe sure that it's between 1 to 10 characters and that it's not an existing prefix.`).reply();
 
-		this.context.client.settings.set(message.guild, 'prefixes', [...[...message.guild?.settings.prefixes!], prefix.value].removeDuplicates());
+		this.context.client.settings.set(message.guild, 'prefixes', [...message.guild?.settings.prefixes!, prefix.value].removeDuplicates());
 		return message.embed.success.setDescription(`Successfully added **\`${prefix.value}\`** to \`${message.guild?.name}\` prefixes.`).reply({ users: [message.author.id], roles: [] });
 	}
 
