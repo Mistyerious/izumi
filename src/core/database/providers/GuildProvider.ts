@@ -32,6 +32,17 @@ export class GuildProvider extends Provider<IGuildSettings> {
 		return await prisma.settings.upsert({ where: { id: key }, update: { data: JSON.stringify(item) }, create: { id: key, data: JSON.stringify(item) } });
 	}
 
+	async rawSet(key: GuildKey, raw: IGuildSettings): Promise<Record<string, any>> {
+		key = GuildProvider.id(key);
+
+		const item = this.items.get(key) ?? this.default;
+		const merged = { ...item, ...raw };
+
+		this.items.set(key, { ...item, ...raw });
+
+		return await prisma.settings.upsert({ where: { id: key }, update: { data: JSON.stringify(merged) }, create: { id: key, data: JSON.stringify(merged) } });
+	}
+
 	async delete(key: GuildKey, path: string): Promise<settings> {
 		key = GuildProvider.id(key);
 

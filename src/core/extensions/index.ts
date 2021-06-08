@@ -1,3 +1,5 @@
 import './Array';
 import './String';
-import './Guild'
+
+import './Guild';
+import './Message';

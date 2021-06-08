@@ -9,6 +9,7 @@ declare global {
 	interface Array<T> {
 		random(): T;
 		progress(): T;
+		removeDuplicates(): T;
 	}
 
 	interface String {

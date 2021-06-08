@@ -8,3 +8,7 @@ Array.prototype.progress = function () {
 
 	return element;
 };
+
+Array.prototype.removeDuplicates = function () {
+	return [...new Set(this)];
+};

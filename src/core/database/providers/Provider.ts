@@ -6,8 +6,6 @@ export abstract class Provider<T> {
 	readonly items = new Collection<string, T>();
 	abstract readonly default: T;
 
-	constructor() {}
-
 	abstract init(): void;
 
 	get(key: string, path: string, defaultValue?: T): T | undefined {
@@ -15,9 +13,10 @@ export abstract class Provider<T> {
 	}
 
 	abstract set(key: string, path: string, value: unknown): Record<string, any> | void;
+	abstract rawSet(key: string, raw: Partial<T>): Record<string, any> | void;
+	abstract clear(key: string): void;
 	abstract delete(key: string, path: string): Record<string, any> | void;
-  abstract clear(key: string): void;
-  
+
 	raw(key: string) {
 		return this.items.get(key) ?? this.default;
 	}
