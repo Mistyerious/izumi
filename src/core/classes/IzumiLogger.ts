@@ -1,3 +1,4 @@
+import { enumerable } from '@sapphire/decorators';
 import { ILogger } from '@sapphire/framework';
 import { EOL } from 'os';
 import { Utilities } from './Utilities';
@@ -7,6 +8,7 @@ type RGBColour = [number, number, number];
 export class IzumiLogger implements ILogger {
 	constructor(private readonly _namespace: string) {}
 
+	@enumerable(false)
 	private readonly _colours: {
 		info: RGBColour;
 		debug: RGBColour;

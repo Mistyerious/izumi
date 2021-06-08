@@ -19,7 +19,8 @@
 		"baseUrl": "./src/",
 		"declaration": true,
 		"paths": {
-			"@core": ["core/index.ts"]
+			"@core": ["core/index.ts"],
+			"@database": ["core/database/index.ts"]
 		}
 	},
 	"include": ["src/**/*"],
