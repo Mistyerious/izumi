@@ -16,7 +16,7 @@ export abstract class Provider<T> {
 	abstract rawSet(key: string, raw: Partial<T>): Record<string, any> | void;
 	abstract clear(key: string): void;
 	abstract delete(key: string, path: string): Record<string, any> | void;
-
+	
 	raw(key: string) {
 		return this.items.get(key) ?? this.default;
 	}
