@@ -3,3 +3,7 @@ config.yaml
 node_modules
 coverage
 .env
+
+# for now
+docker-compose.yaml
+Dockerfile

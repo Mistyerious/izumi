@@ -1,5 +1,3 @@
-import { Constructable } from 'discord.js';
-
 export class Utilities {
 	/**
 	 * Return the RGB ANSI escape code.
@@ -8,6 +6,4 @@ export class Utilities {
 	 * @returns string
 	 */
 	static rgb = ([r, g, b]: [number, number, number], ...args: unknown[]): string => `\x1b[38;2;${r};${g};${b}m${args.join(' ')}\x1b[0m`;
-
-	static createClassDecorator = <T extends (...args: any[]) => void>(fun: T): ClassDecorator => fun;
 }

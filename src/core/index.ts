@@ -1,9 +1,14 @@
-export * from './classes';
-export * from './Interfaces';
-
 import type { PrismaClient } from '@prisma/client';
 import type { Configuration } from '@sach1/dahlia';
+import type { Counter, Registry } from 'prom-client';
+
 import './extensions';
+
+interface IPrometheus {
+	commands: Counter<string>;
+	errors: Counter<string>;
+	register: Registry;
+}
 
 declare global {
 	interface Array<T> {
@@ -18,6 +23,6 @@ declare global {
 
 	var prisma: PrismaClient;
 	var config: Configuration;
-
-	type Ctor<A extends readonly any[], R = any> = new (...args: A) => R;
+	var prometheus: IPrometheus;
+	var register: Registry;
 }

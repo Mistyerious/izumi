@@ -52,6 +52,11 @@ export class IzumiLogger implements ILogger {
 	}
 
 	protected _write(colour: [number, number, number], level: string, ...message: unknown[]) {
-		process.stdout.write(`${Utilities.rgb(this._colours.foreground, new Date().toLocaleString())} ${Utilities.rgb(colour, level.toUpperCase())} (${this._namespace.toDotCase()} - ${process.pid}) ${Utilities.rgb(colour, message)}${EOL}`);
+		process.stdout.write(
+			`${Utilities.rgb(this._colours.foreground, new Date().toLocaleString())} ${Utilities.rgb(colour, level.toUpperCase())} (${this._namespace.toDotCase()}) ${Utilities.rgb(this._colours.foreground, process.pid)} ${Utilities.rgb(
+				colour,
+				message,
+			)}${EOL}`,
+		);
 	}
 }

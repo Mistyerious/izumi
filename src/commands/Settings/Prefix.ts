@@ -3,7 +3,7 @@ import type { Message } from 'discord.js';
 
 import { ApplyOptions } from '@sapphire/decorators';
 import { Args } from '@sapphire/framework';
-import { IzumiCommand } from '@core';
+import { IzumiCommand } from '@client';
 
 @ApplyOptions<SubCommandPluginCommandOptions>({
 	name: 'prefix',
@@ -21,7 +21,7 @@ export default class extends IzumiCommand {
 
 	async remove(message: Message, args: Args) {
 		const prefix = await args.pickResult('string', { minimum: 1, maximum: 10 });
-
+		
 		if (!prefix.success || !message.guild?.settings.prefixes.includes(prefix.value)) return message.embed.error.setDescription('Invalid prefix provided.').reply();
 
 		this.context.client.settings.set(

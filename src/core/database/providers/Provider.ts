@@ -1,4 +1,3 @@
-import { settings } from '.prisma/client';
 import { Configuration } from '@sach1/dahlia';
 import { Collection } from 'discord.js';
 
@@ -16,7 +15,7 @@ export abstract class Provider<T> {
 	abstract rawSet(key: string, raw: Partial<T>): Record<string, any> | void;
 	abstract clear(key: string): void;
 	abstract delete(key: string, path: string): Record<string, any> | void;
-	
+
 	raw(key: string) {
 		return this.items.get(key) ?? this.default;
 	}

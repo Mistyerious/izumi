@@ -1,7 +1,9 @@
+import type { ClientOptions, Message } from 'discord.js';
+
 import { GuildProvider } from '@database';
+import { API } from '@api';
 import { enumerable } from '@sapphire/decorators';
-import { SapphireClient, SapphirePrefixHook } from '@sapphire/framework';
-import { ClientOptions, Message, MessageEmbed } from 'discord.js';
+import { SapphireClient } from '@sapphire/framework';
 
 declare module '@sapphire/framework' {
 	interface SapphireClient {
@@ -17,11 +19,11 @@ export class IzumiClient extends SapphireClient {
 		super(options);
 	}
 
-	fetchPrefix = (message: Message) => {
-		return message.guild?.settings.prefixes!;
-	};
+	fetchPrefix = (message: Message) => message.guild?.settings.prefixes!;
 
-	async start(token: string) {
+	async start(token: string, port: number) {
+		new API().start(port);
+
 		await super.login(token);
 		await this.settings.init();
 

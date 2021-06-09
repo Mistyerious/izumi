@@ -1,8 +1,9 @@
-import { settings } from '.prisma/client';
+import type { IGuildSettings } from '@interfaces';
+import type { settings } from '@prisma/client';
+
 import { Configuration } from '@sach1/dahlia';
 import { Guild } from 'discord.js';
 import { Provider } from './Provider';
-import { IGuildSettings } from '@core';
 
 type GuildKey = string | null | undefined | Guild;
 

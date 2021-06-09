@@ -9,3 +9,6 @@ bot:
   statuses:
     - 'Water is cool.'
     - 'i.help'
+  api:
+    port: 6969
+    key: 'password'

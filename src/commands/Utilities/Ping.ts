@@ -1,6 +1,6 @@
 import { ApplyOptions } from '@sapphire/decorators';
 import { CommandOptions, } from '@sapphire/framework';
-import { IzumiCommand } from '@core';
+import { IzumiCommand } from '@client';
 import type { Message } from 'discord.js';
 
 @ApplyOptions<CommandOptions>({

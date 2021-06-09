@@ -1,4 +1,4 @@
-import { IGuildSettings, IzumiEmbed } from '@core';
+import { IzumiEmbed } from '@client';
 import { Structures } from 'discord.js';
 
 export class IzumiMessage extends Structures.get('Message') {

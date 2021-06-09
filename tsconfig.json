@@ -19,8 +19,11 @@
 		"baseUrl": "./src/",
 		"declaration": true,
 		"paths": {
-			"@core": ["core/index.ts"],
-			"@database": ["core/database/index.ts"]
+			"@client": ["core/client/index.ts"],
+			"@api": ["core/api/index.ts"],
+			"@database": ["core/database/index.ts"],
+			"@shared": ["core/shared/index.ts"],
+			"@interfaces": ["core/Interfaces.ts"]
 		}
 	},
 	"include": ["src/**/*"],

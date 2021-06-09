@@ -1,5 +1,4 @@
-import type { MessageMentionOptions } from 'discord.js';
-import { Message, MessageEmbed } from 'discord.js';
+import { Message, MessageEmbed, MessageMentionOptions } from 'discord.js';
 
 export class IzumiEmbed extends MessageEmbed {
 	private static readonly _footers = ['Remember to drink water', 'I ran out of ideas lol.'];

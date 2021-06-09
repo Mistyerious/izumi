@@ -1,5 +1,7 @@
-import type { IzumiClient, IGuildSettings } from '@core';
-import { Client, Structures } from 'discord.js';
+import type { IzumiClient } from '@client';
+import type { IGuildSettings } from '@interfaces';
+
+import { Structures } from 'discord.js';
 
 export class IzumiGuild extends Structures.get('Guild') {
 	get settings(): IGuildSettings {
