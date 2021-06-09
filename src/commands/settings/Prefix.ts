@@ -21,7 +21,7 @@ export default class extends IzumiCommand {
 
 	async remove(message: Message, args: Args) {
 		const prefix = await args.pickResult('string', { minimum: 1, maximum: 10 });
-		
+
 		if (!prefix.success || !message.guild?.settings.prefixes.includes(prefix.value)) return message.embed.error.setDescription('Invalid prefix provided.').reply();
 
 		this.context.client.settings.set(
@@ -35,7 +35,7 @@ export default class extends IzumiCommand {
 
 	list(message: Message) {
 		message.embed
-			.setTitle(`Here's the prefixes avaiable for ${message.guild?.name}`)
+			.setTitle(`Here's the prefixes available for ${message.guild?.name}`)
 			.setThumbnail(message.guild?.iconURL({ dynamic: true })!)
 			.setDescription(message.guild?.settings.prefixes.map((prefix) => `- **\`${prefix}\`**`).join('\n')!)
 			.reply();

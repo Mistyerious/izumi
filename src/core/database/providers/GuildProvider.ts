@@ -8,7 +8,7 @@ import { Provider } from './Provider';
 type GuildKey = string | null | undefined | Guild;
 
 export class GuildProvider extends Provider<IGuildSettings> {
-	readonly default: IGuildSettings = { prefixes: config.get('bot.prefixes')! };
+	readonly default: IGuildSettings = { prefixes: config.get('bot.prefixes')!, lang: 'en' };
 
 	async init() {
 		for (const { id, data } of await prisma.settings.findMany()) this.items.set(id, JSON.parse(data));

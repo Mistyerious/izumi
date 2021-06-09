@@ -15,7 +15,7 @@
 	"_moduleAliasIgnoreWarning": true,
 	"scripts": {
 		"start": "node .",
-		"prestart": "npx --quiet link-module-alias && npx prisma generate && tsc && clear",
+		"prestart": "npx --quiet link-module-alias && npx prisma generate && tsc && cls",
 		"postinstall": "npx --quiet link-module-alias",
 		"clean": "rm -rf build node_modules coverage && echo -e '\\033[32mCleaned.'",
 		"lint": "eslint . --ext .ts",
@@ -30,7 +30,7 @@
 		"@sapphire/decorators": "^2.1.3",
 		"@sapphire/framework": "^1.0.2",
 		"@sapphire/plugin-subcommands": "^1.0.5",
-		"discord.js": "discordjs/discord.js",
+		"discord.js": "^13.0.0-dev.e980948de55e91e59c9e3293ac76bc645a058a53",
 		"express": "^4.17.1",
 		"prom-client": "^13.1.0"
 	},
