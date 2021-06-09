@@ -1,4 +1,4 @@
-import { Args, CommandContext } from '@sapphire/framework';
+import { Args, Awaited, CommandContext } from '@sapphire/framework';
 import { SubCommandPluginCommand } from '@sapphire/plugin-subcommands';
 import { Message } from 'discord.js';
 

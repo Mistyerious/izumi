@@ -7,3 +7,5 @@ coverage
 # for now
 docker-compose.yaml
 Dockerfile
+
+schema.sql

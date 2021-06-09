@@ -1,13 +1,12 @@
-import './core/extensions'
+import './core/extensions';
 import { IzumiClient } from '@client';
 import { IzumiLogger } from '@shared';
 import { IConfig } from '@interfaces';
 
 import { PrismaClient } from '@prisma/client';
 import { Configuration } from '@sach1/dahlia';
-import { Intents } from 'discord.js';
 import { resolve } from 'path';
-import { Counter, register, Registry } from 'prom-client';
+import { Counter, register } from 'prom-client';
 
 global.register = register;
 global.prisma = new PrismaClient();
@@ -27,7 +26,7 @@ const {
 new IzumiClient({
 	caseInsensitivePrefixes: true,
 	defaultPrefix: prefixes,
-	intents: Intents.ALL,
+	intents: ['GUILD_MEMBERS', 'GUILD_MESSAGES', 'GUILD_MESSAGE_REACTIONS', 'GUILD_BANS', 'GUILD_INTEGRATIONS', 'GUILD_PRESENCES', 'GUILDS'],
 	caseInsensitiveCommands: true,
 	messageCacheMaxSize: 50,
 	messageCacheLifetime: 60,

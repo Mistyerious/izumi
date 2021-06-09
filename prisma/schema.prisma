@@ -8,8 +8,19 @@ datasource db {
 }
 
 model settings {
-  id   String  @id @db.VarChar(255)
-  data String @default("{}")
+    id      String      @db.VarChar(255) @id
+    data    String      @default("{}")
 
-  @@map("settings")
+    @@map("settings")
+}
+
+model warns {
+    guildId String
+    userId  String
+    caseId  String      @id
+    moderator String    @db.VarChar(22)
+    reason  String
+    timestamp   String
+
+    @@map("warns")
 }
