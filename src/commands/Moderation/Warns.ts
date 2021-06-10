@@ -8,6 +8,7 @@ import { Utilities } from '@shared';
 
 @ApplyOptions<IzumiCommand.Options>({
 	name: 'warn',
+	userPermissions: ['MANAGE_MESSAGES'],
 	subCommands: ['edit', 'remove', 'list', { input: 'add', default: true }],
 })
 export default class Warns extends IzumiCommand {

@@ -1,12 +1,11 @@
-import type { SubCommandPluginCommandOptions } from '@sapphire/plugin-subcommands';
 import type { Message } from 'discord.js';
-
 import { ApplyOptions } from '@sapphire/decorators';
-import { Args, PermissionsPrecondition } from '@sapphire/framework';
+import { Args } from '@sapphire/framework';
 import { IzumiCommand } from '@client';
 
 @ApplyOptions<IzumiCommand.Options>({
 	name: 'prefix',
+	userPermissions: ['MANAGE_GUILD'],
 	subCommands: ['add', 'remove', { input: 'list', default: true }],
 })
 export default class extends IzumiCommand {

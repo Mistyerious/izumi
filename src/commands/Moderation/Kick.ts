@@ -5,6 +5,7 @@ import { MessageActionRow, MessageButton, MessageComponentInteraction, Message }
 
 @ApplyOptions<IzumiCommand.Options>({
 	name: 'kick',
+	userPermissions: ['KICK_MEMBERS'],
 	permissions: ['KICK_MEMBERS'],
 })
 export default class extends IzumiCommand {
@@ -14,13 +15,15 @@ export default class extends IzumiCommand {
 		const member = await args.pickResult('member');
 		const reason = (await args.restResult('string')).value ?? 'No reason provided';
 
-		if (!member.success) return message.embed.error.setDescription('Please provide a valid member').send();
+		if (!member.success) return message.embed.error.setDescription('Please provide a valid member').reply();
+		if ([member.value.id, this.context.client.id].includes(message.member?.id!)) return message.embed.error.setDescription('Why would you want to kick that user?').reply();
+		if (message.member?.roles.highest.position! < member.value.roles.highest.position) return message.embed.error.setDescription('That user highest role is higher than yours.').reply();
 
 		message.embed.success
 			.setDescription(`Are you sure you want to kick ${member.value.user.username}?`)
 			.setAuthor(message.author.username, message.author.displayAvatarURL({ dynamic: true }))
 			.setFooter(`You have 30 seconds to decide`)
-			.send({ components: [new MessageActionRow().addComponents(new MessageButton().setCustomID('kickApprove').setLabel('Approve').setStyle('SUCCESS'), new MessageButton().setCustomID('kickDeny').setLabel('Deny').setStyle('DANGER'))] })
+			.reply({ components: [new MessageActionRow().addComponents(new MessageButton().setCustomID('kickApprove').setLabel('Approve').setStyle('SUCCESS'), new MessageButton().setCustomID('kickDeny').setLabel('Deny').setStyle('DANGER'))] })
 			?.then((msg: Message | Message[]) => {
 				if (Array.isArray(msg)) msg = msg[0];
 

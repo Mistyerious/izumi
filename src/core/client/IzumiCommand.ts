@@ -2,9 +2,10 @@ import { Args, Awaited, CommandContext, PermissionsPrecondition, PieceContext, P
 import { SubCommandPluginCommand } from '@sapphire/plugin-subcommands';
 import { PermissionResolvable } from 'discord.js';
 import { Message } from 'discord.js';
+import { default as UserPermissionsPrecondition} from '../../preconditions/userPermissionsPrecondition';
 
 export abstract class IzumiCommand extends SubCommandPluginCommand<Args, IzumiCommand> {
-	constructor(context: PieceContext, options: IzumiCommand.Options) {
+	constructor(context: PieceContext, public options: IzumiCommand.Options) {
 		super(context, IzumiCommand.resolvePreConditions(context, options));
 	}
 
@@ -20,6 +21,7 @@ export abstract class IzumiCommand extends SubCommandPluginCommand<Args, IzumiCo
 
 		if (options.nsfw) preconditions.push('NSFW');
 		if (options.permissions) preconditions.push(new PermissionsPrecondition(options.permissions));
+		if (options.userPermissions) preconditions.push(new UserPermissionsPrecondition(context, { name: 'userPermissionsPrecondition'}))
 
 		return options;
 	}
@@ -29,6 +31,7 @@ export namespace IzumiCommand {
 	export type Options = SubCommandPluginCommand.Options & {
 		nsfw?: boolean;
 		permissions?: PermissionResolvable;
+		userPermissions?: PermissionResolvable;
 	};
 
 	export type Context = CommandContext;
