@@ -25,6 +25,11 @@ export abstract class IzumiCommand extends SubCommandPluginCommand<Args, IzumiCo
 
 		return options;
 	}
+
+	get category() {
+		const split = this.path.split('/');
+		return split.slice(split.indexOf('commands') + 1, -1)[0];
+	}
 }
 
 export namespace IzumiCommand {

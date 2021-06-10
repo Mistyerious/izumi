@@ -9,34 +9,34 @@ import { IzumiCommand } from '@client';
 	subCommands: ['add', 'remove', { input: 'list', default: true }],
 })
 export default class extends IzumiCommand {
-	async add(message: Message, args: Args) {
+	async add({ embed, guild, author }: Message, args: Args) {
 		const prefix = await args.pickResult('string', { minimum: 1, maximum: 10 });
 
-		if (!prefix.success) return message.embed.error.setDescription(`Invalid prefix provided.\nBe sure that it's between 1 to 10 characters and that it's not an existing prefix.`).reply();
+		if (!prefix.success) return embed.error.setDescription(`Invalid prefix provided.\nBe sure that it's between 1 to 10 characters and that it's not an existing prefix.`).reply();
 
-		this.context.client.settings.set(message.guild, 'prefixes', [...message.guild?.settings.prefixes!, prefix.value].removeDuplicates());
-		return message.embed.success.setDescription(`Successfully added **\`${prefix.value}\`** to \`${message.guild?.name}\` prefixes.`).reply({ users: [message.author.id], roles: [] });
+		this.context.client.settings.set(guild, 'prefixes', [...guild?.settings.prefixes!, prefix.value].removeDuplicates());
+		return embed.success.setDescription(`Successfully added **\`${prefix.value}\`** to \`${guild?.name}\` prefixes.`).reply({ users: [author.id], roles: [] });
 	}
 
-	async remove(message: Message, args: Args) {
+	async remove({ guild, embed, author }: Message, args: Args) {
 		const prefix = await args.pickResult('string', { minimum: 1, maximum: 10 });
 
-		if (!prefix.success || !message.guild?.settings.prefixes.includes(prefix.value)) return message.embed.error.setDescription('Invalid prefix provided.').reply();
+		if (!prefix.success || !guild?.settings.prefixes.includes(prefix.value)) return embed.error.setDescription('Invalid prefix provided.').reply();
 
 		this.context.client.settings.set(
-			message.guild,
+			guild,
 			'prefixes',
-			message.guild?.settings.prefixes.filter((p) => p !== prefix.value),
+			guild?.settings.prefixes.filter((p) => p !== prefix.value),
 		);
 
-		return message.embed.success.setDescription(`Successfully removed **\`${prefix.value}\`** from \`${message.guild?.name}\` prefixes.`).reply({ users: [message.author.id], roles: [] });
+		return embed.success.setDescription(`Successfully removed **\`${prefix.value}\`** from \`${guild?.name}\` prefixes.`).reply({ users: [author.id], roles: [] });
 	}
 
-	list(message: Message) {
-		message.embed
-			.setTitle(`Here's the prefixes available for ${message.guild?.name}`)
-			.setThumbnail(message.guild?.iconURL({ dynamic: true })!)
-			.setDescription(message.guild?.settings.prefixes.map((prefix) => `- **\`${prefix}\`**`).join('\n')!)
+	list({ embed, guild }: Message) {
+		embed
+			.setTitle(`Here's the prefixes available for ${guild?.name}`)
+			.setThumbnail(guild?.iconURL({ dynamic: true })!)
+			.setDescription(guild?.settings.prefixes.map((prefix) => `- **\`${prefix}\`**`).join('\n')!)
 			.reply();
 	}
 }
