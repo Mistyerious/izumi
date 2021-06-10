@@ -2,10 +2,10 @@ import type { SubCommandPluginCommandOptions } from '@sapphire/plugin-subcommand
 import type { Message } from 'discord.js';
 
 import { ApplyOptions } from '@sapphire/decorators';
-import { Args } from '@sapphire/framework';
+import { Args, PermissionsPrecondition } from '@sapphire/framework';
 import { IzumiCommand } from '@client';
 
-@ApplyOptions<SubCommandPluginCommandOptions>({
+@ApplyOptions<IzumiCommand.Options>({
 	name: 'prefix',
 	subCommands: ['add', 'remove', { input: 'list', default: true }],
 })

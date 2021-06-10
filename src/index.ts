@@ -1,7 +1,7 @@
 import './core/extensions';
 import { IzumiClient } from '@client';
 import { IzumiLogger } from '@shared';
-import { IConfig } from '@interfaces';
+import { IConfig } from '@typings';
 
 import { PrismaClient } from '@prisma/client';
 import { Configuration } from '@sach1/dahlia';

@@ -7,20 +7,20 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model settings {
-    id      String      @db.VarChar(255) @id
-    data    String      @default("{}")
+model Settings {
+    id        String      @db.VarChar(255) @id
+    data      String      @default("{}")
 
     @@map("settings")
 }
 
-model warns {
-    guildId String
-    userId  String
-    caseId  String      @id
-    moderator String    @db.VarChar(22)
-    reason  String
-    timestamp   String
+model Warns {
+    caseId    String      @id
+    guildId   String      
+    userId    String
+    moderator String      @db.VarChar(22)
+    reason    String
+    timestamp String
 
     @@map("warns")
 }

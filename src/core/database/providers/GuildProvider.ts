@@ -1,5 +1,5 @@
-import type { IGuildSettings } from '@interfaces';
-import type { settings } from '@prisma/client';
+import type { IGuildSettings } from '@typings';
+import type { Settings } from '@prisma/client';
 
 import { Configuration } from '@sach1/dahlia';
 import { Guild } from 'discord.js';
@@ -44,7 +44,7 @@ export class GuildProvider extends Provider<IGuildSettings> {
 		return await prisma.settings.upsert({ where: { id: key }, update: { data: JSON.stringify(merged) }, create: { id: key, data: JSON.stringify(merged) } });
 	}
 
-	async delete(key: GuildKey, path: string): Promise<settings> {
+	async delete(key: GuildKey, path: string): Promise<Settings> {
 		key = GuildProvider.id(key);
 
 		const item = this.items.get(key) ?? this.default;
@@ -55,7 +55,7 @@ export class GuildProvider extends Provider<IGuildSettings> {
 		return await prisma.settings.delete({ where: { id: key } });
 	}
 
-	async clear(key: GuildKey): Promise<settings | void> {
+	async clear(key: GuildKey): Promise<Settings | void> {
 		key = GuildProvider.id(key);
 		const item = this.items.get(key);
 

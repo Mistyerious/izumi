@@ -1,5 +1,5 @@
 import type { IzumiClient } from '@client';
-import type { IGuildSettings } from '@interfaces';
+import type { IGuildSettings } from '@typings';
 
 import { Structures } from 'discord.js';
 

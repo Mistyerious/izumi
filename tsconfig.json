@@ -23,7 +23,7 @@
 			"@api": ["core/api/index.ts"],
 			"@database": ["core/database/index.ts"],
 			"@shared": ["core/shared/index.ts"],
-			"@interfaces": ["core/Interfaces.ts"]
+			"@typings": ["core/typings/index.ts"]
 		}
 	},
 	"include": ["src/**/*"],

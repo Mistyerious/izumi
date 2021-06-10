@@ -1,11 +1,35 @@
-import { Args, Awaited, CommandContext } from '@sapphire/framework';
+import { Args, Awaited, CommandContext, PermissionsPrecondition, PieceContext, PreconditionEntryResolvable } from '@sapphire/framework';
 import { SubCommandPluginCommand } from '@sapphire/plugin-subcommands';
+import { PermissionResolvable } from 'discord.js';
 import { Message } from 'discord.js';
 
-export abstract class IzumiCommand extends SubCommandPluginCommand {
+export abstract class IzumiCommand extends SubCommandPluginCommand<Args, IzumiCommand> {
+	constructor(context: PieceContext, options: IzumiCommand.Options) {
+		super(context, IzumiCommand.resolvePreConditions(context, options));
+	}
+
 	run(message: Message, args: Args, context: CommandContext): Awaited<unknown> {
 		if (!this.subCommands) throw new Error(`Command ${this.name} does not implement the run method nor does it support sub-commands.`);
-
 		return this.subCommands.run({ message, args, context, command: this });
 	}
+
+	private static resolvePreConditions(context: PieceContext, options: IzumiCommand.Options): IzumiCommand.Options {
+		options.generateDashLessAliases ??= true;
+
+		const preconditions = (options.preconditions ??= []) as PreconditionEntryResolvable[];
+
+		if (options.nsfw) preconditions.push('NSFW');
+		if (options.permissions) preconditions.push(new PermissionsPrecondition(options.permissions));
+
+		return options;
+	}
+}
+
+export namespace IzumiCommand {
+	export type Options = SubCommandPluginCommand.Options & {
+		nsfw?: boolean;
+		permissions?: PermissionResolvable;
+	};
+
+	export type Context = CommandContext;
 }

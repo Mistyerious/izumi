@@ -1,4 +1,5 @@
-import { Message, MessageEmbed, MessageMentionOptions } from 'discord.js';
+import { EmbedMessageTypes } from '@typings';
+import { Message, MessageEmbed } from 'discord.js';
 
 export class IzumiEmbed extends MessageEmbed {
 	private static readonly _footers = ['Remember to drink water', 'I ran out of ideas lol.'];
@@ -11,16 +12,16 @@ export class IzumiEmbed extends MessageEmbed {
 		});
 	}
 
-	send(mentions: MessageMentionOptions = {}): Promise<Message> | undefined {
-		return this._message?.channel.send({ embed: this, ...mentions });
+	send(options: EmbedMessageTypes = {}): Promise<Message | Message[]> | undefined {
+		return this._message?.channel.send({ embed: this, ...options });
 	}
 
-	reply(mentions: MessageMentionOptions = {}): Promise<Message> | undefined {
-		return this._message?.reply({ embed: this, ...mentions });
+	reply(options: EmbedMessageTypes = {}): Promise<Message | Message[]> | undefined {
+		return this._message?.reply({ embed: this, ...options });
 	}
 
-	edit(): Promise<Message> | undefined {
-		return this._message?.edit(this);
+	edit(options: EmbedMessageTypes = {}): Promise<Message> | undefined {
+		return this._message?.edit({ embed: this, ...options });
 	}
 
 	get fatal(): this {
