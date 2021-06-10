@@ -18,7 +18,7 @@ export default class Warns extends IzumiCommand {
 
 		if (!member.success) return message.embed.error.setDescription('Please provide a valid member to warn').reply({ users: [message.author.id], roles: [] });
 
-		await prisma.warns
+		prisma.warns
 			.create({
 				data: {
 					guildId: message.guild?.id!,
@@ -61,7 +61,7 @@ export default class Warns extends IzumiCommand {
 		const caseData = await prisma.warns.findFirst({ where: { caseId: caseId.value, AND: { guildId: message.guild?.id } } });
 		if (!caseData) return message.embed.error.setDescription(`There is no case with the id of **${caseId.value}**`).reply();
 
-		await prisma.warns
+		prisma.warns
 			.update({ where: { caseId: caseId.value }, data: { reason: reason.value } })
 			.then(() => {
 				message.embed.success
@@ -87,12 +87,18 @@ export default class Warns extends IzumiCommand {
 		const caseData = await prisma.warns.findFirst({ where: { caseId: caseID.value, AND: { guildId: message.guild?.id } } });
 		if (!caseData) return message.embed.error.setDescription(`There is no case with the id of **${caseID.value}**`).reply();
 
-		await prisma.warns.delete({ where: { caseId: caseData.caseId } });
-
-		message.embed.success
-			.setDescription(`Case  \`${caseID.value}\` has been deleted`)
-			.setThumbnail(message.author.displayAvatarURL({ dynamic: true }))
-			.reply();
+		prisma.warns
+			.delete({ where: { caseId: caseData.caseId } })
+			.then(() => {
+				message.embed.success
+					.setDescription(`Case  \`${caseID.value}\` has been deleted`)
+					.setThumbnail(message.author.displayAvatarURL({ dynamic: true }))
+					.reply();
+			})
+			.catch((error) => {
+				this.context.logger.error(error);
+				message.embed.fatal.setDescription('There was an error removing the case, please alert the developers.').reply();
+			});
 	}
 
 	async list(message: Message, args: Args) {

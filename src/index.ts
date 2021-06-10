@@ -1,4 +1,5 @@
 import './core/extensions';
+
 import { IzumiClient } from '@client';
 import { IzumiLogger } from '@shared';
 import { IConfig } from '@typings';
