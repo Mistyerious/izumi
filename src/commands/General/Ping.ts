@@ -4,6 +4,7 @@ import type { Message } from 'discord.js';
 
 @ApplyOptions<IzumiCommand.Options>({
 	name: 'ping',
+	description: 'Shows you the ping of the bot duh',
 })
 export default class extends IzumiCommand {
 	run({ embed, createdTimestamp, editedTimestamp, client }: Message) {

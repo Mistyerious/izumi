@@ -15,7 +15,7 @@ export default class extends Event<Events.Ready> {
 
 	private _setStatus = () => {
 		this.context.client.user?.setPresence({
-			status: 'dnd',
+			status: 'invisible',
 			activities: [
 				{
 					name: this._statuses.progress(),

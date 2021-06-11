@@ -3,6 +3,7 @@ import { SubCommandPluginCommand } from '@sapphire/plugin-subcommands';
 import { PermissionResolvable } from 'discord.js';
 import { Message } from 'discord.js';
 import { default as UserPermissionsPrecondition} from '../../preconditions/userPermissionsPrecondition';
+import { sep } from 'path';
 
 export abstract class IzumiCommand extends SubCommandPluginCommand<Args, IzumiCommand> {
 	constructor(context: PieceContext, public options: IzumiCommand.Options) {
@@ -27,7 +28,7 @@ export abstract class IzumiCommand extends SubCommandPluginCommand<Args, IzumiCo
 	}
 
 	get category() {
-		const split = this.path.split('/');
+		const split = this.path.split(sep);
 		return split.slice(split.indexOf('commands') + 1, -1)[0];
 	}
 }
@@ -37,6 +38,8 @@ export namespace IzumiCommand {
 		nsfw?: boolean;
 		permissions?: PermissionResolvable;
 		userPermissions?: PermissionResolvable;
+		usage?: string;
+		examples?: string[];
 	};
 
 	export type Context = CommandContext;

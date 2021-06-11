@@ -15,7 +15,7 @@
 	"_moduleAliasIgnoreWarning": true,
 	"scripts": {
 		"start": "node .",
-		"prestart": "npx --quiet link-module-alias && npx prisma generate && tsc && clear",
+		"prestart": "npx --quiet link-module-alias && npx prisma generate && tsc && cls",
 		"postinstall": "npx --quiet link-module-alias",
 		"clean": "rm -rf build node_modules coverage && echo -e '\\033[32mCleaned.'",
 		"lint": "eslint . --ext .ts",
